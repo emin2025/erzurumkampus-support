@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erzurum Kampüs – Destek</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand: #5B4FE8;
+      --brand-light: #7B72F0;
+      --brand-dark: #3D33C8;
+      --accent: #FF6B6B;
+      --bg: #0D0D1A;
+      --surface: #13131F;
+      --surface2: #1A1A2E;
+      --border: rgba(255,255,255,0.07);
+      --text: #F0F0FF;
+      --muted: #8888AA;
+      --radius: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(13,13,26,0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 800; color: #fff;
+    }
+    .nav-logo-text { font-size: 16px; font-weight: 700; color: var(--text); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 800px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(91,79,232,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(91,79,232,0.15); border: 1px solid rgba(91,79,232,0.3);
+      border-radius: 100px; padding: 6px 16px;
+      font-size: 13px; font-weight: 500; color: var(--brand-light);
+      margin-bottom: 28px;
+    }
+    .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--brand-light); display: block; }
+    h1 {
+      font-size: clamp(42px, 8vw, 80px);
+      font-weight: 800; letter-spacing: -2px; line-height: 1.05;
+      background: linear-gradient(135deg, #fff 30%, var(--brand-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px); color: var(--muted);
+      max-width: 520px; margin: 0 auto 48px; font-weight: 400;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      color: #fff; text-decoration: none;
+      padding: 16px 32px; border-radius: 100px;
+      font-size: 15px; font-weight: 600;
+      box-shadow: 0 8px 32px rgba(91,79,232,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(91,79,232,0.5); }
+    .hero-cta svg { width: 18px; height: 18px; }
+
+    /* ── SECTION ── */
+    section { padding: 100px 24px; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--brand-light);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px); font-weight: 800;
+      letter-spacing: -1px; margin-bottom: 16px;
+    }
+    .section-desc { color: var(--muted); font-size: 17px; max-width: 560px; margin-bottom: 56px; }
+
+    /* ── CARDS ── */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .card:hover { border-color: rgba(91,79,232,0.4); transform: translateY(-4px); }
+    .card-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 20px;
+    }
+    .card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .card p { color: var(--muted); font-size: 15px; line-height: 1.7; }
+
+    /* ── FAQ ── */
+    .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 800px; }
+    details {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    details[open] { border-color: rgba(91,79,232,0.4); }
+    summary {
+      padding: 22px 28px; font-weight: 600; font-size: 16px;
+      cursor: pointer; list-style: none;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: '+'; font-size: 22px; font-weight: 300; color: var(--brand-light);
+      flex-shrink: 0; transition: transform 0.3s;
+    }
+    details[open] summary::after { transform: rotate(45deg); }
+    .faq-body { padding: 0 28px 24px; color: var(--muted); font-size: 15px; line-height: 1.8; }
+    .faq-body ol, .faq-body ul { padding-left: 20px; margin-top: 8px; }
+    .faq-body li { margin-bottom: 6px; }
+
+    /* ── STEPS ── */
+    .steps { display: flex; flex-direction: column; gap: 0; max-width: 700px; }
+    .step { display: flex; gap: 24px; position: relative; }
+    .step:not(:last-child)::before {
+      content: '';
+      position: absolute; left: 21px; top: 52px;
+      width: 2px; bottom: 0;
+      background: linear-gradient(to bottom, rgba(91,79,232,0.5), transparent);
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; color: #fff;
+      margin-top: 4px;
+    }
+    .step-content { padding-bottom: 40px; }
+    .step-content h4 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+    .step-content p { color: var(--muted); font-size: 15px; line-height: 1.7; }
+
+    /* ── CONTACT ── */
+    .contact-wrap {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+      border: 1px solid var(--border);
+      border-radius: 28px; padding: 60px 48px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .contact-wrap::before {
+      content: '';
+      position: absolute; top: -100px; right: -100px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(91,79,232,0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(91,79,232,0.12); border: 1px solid rgba(91,79,232,0.25);
+      border-radius: 100px; padding: 14px 28px;
+      font-size: 16px; font-weight: 600; color: var(--brand-light);
+      text-decoration: none; margin-top: 24px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .contact-email:hover { background: rgba(91,79,232,0.2); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px; text-align: center;
+      color: var(--muted); font-size: 14px;
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+    .footer-links { display: flex; justify-content: center; gap: 28px; margin-bottom: 16px; flex-wrap: wrap; }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .nav-links { gap: 16px; }
+      .contact-wrap { padding: 40px 24px; }
+      .hero { padding: 100px 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-icon">E</div>
+    <span class="nav-logo-text">Erzurum Kampüs</span>
+  </a>
+  <div class="nav-links">
+    <a href="#destek">Destek</a>
+    <a href="#sss">SSS</a>
+    <a href="#hesap">Hesap</a>
+    <a href="#iletisim">İletişim</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><span></span>7/24 Destek Merkezi</div>
+  <h1>Erzurum Kampüs<br/>Destek Merkezi</h1>
+  <p class="hero-sub">Sorularınız için doğru yerdesiniz. Size en kısa sürede yardımcı olmak için buradayız.</p>
+  <a class="hero-cta" href="#iletisim">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 4h16v12H4z"/><polyline points="22,4 12,13 2,4"/>
+    </svg>
+    Bize Ulaşın
+  </a>
+</div>
+
+<hr class="divider"/>
+
+<!-- DESTEK KONULARI -->
+<section id="destek">
+  <div class="section-label">Destek Konuları</div>
+  <h2 class="section-title">Size Nasıl Yardımcı Olabiliriz?</h2>
+  <p class="section-desc">En sık sorulan konularda hazırladığımız kılavuzlarla sorununuzu hızlıca çözün.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon" style="background:rgba(91,79,232,0.15);">👤</div>
+      <h3>Hesap & Profil</h3>
+      <p>Şifre sıfırlama, profil güncelleme, hesap silme ve giriş sorunları hakkında destek alın.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(255,107,107,0.12);">🔒</div>
+      <h3>Gizlilik & Güvenlik</h3>
+      <p>Verilerinizin nasıl işlendiği, hesap güvenliği ve kişisel bilgilerinizi yönetme konularında bilgi edinin.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(52,211,153,0.12);">📱</div>
+      <h3>Uygulama Sorunları</h3>
+      <p>Teknik sorunlar, bildirim ayarları ve uygulama performansına ilişkin yardım alın.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(251,191,36,0.12);">🚩</div>
+      <h3>İçerik Bildirme</h3>
+      <p>Uygunsuz içerik veya kullanıcı bildirimi hakkında bilgi edinin ve güvenli bir topluluk oluşturmamıza katkı sağlayın.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(167,139,250,0.12);">💬</div>
+      <h3>Genel Sorular</h3>
+      <p>Uygulamanın işleyişi, özellikler ve yenilikler hakkında merak ettiklerinizi sorun.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(56,189,248,0.12);">⚖️</div>
+      <h3>Kullanım Koşulları</h3>
+      <p>Gizlilik politikamız ve kullanım koşullarımız hakkında detaylı bilgiye ulaşın.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- SSS -->
+<section id="sss">
+  <div class="section-label">Sık Sorulan Sorular</div>
+  <h2 class="section-title">Merak Edilenler</h2>
+  <p class="section-desc">En çok sorulan sorulara hızlı yanıtlar.</p>
+
+  <div class="faq-list">
+    <details>
+      <summary>Şifremi unuttum, nasıl sıfırlarım?</summary>
+      <div class="faq-body">
+        Giriş ekranında <strong>"Şifremi Unuttum"</strong> seçeneğine dokunun. E-posta adresinizi girin; size şifre sıfırlama bağlantısı göndereceğiz. Gelen kutunuzu ve spam klasörünüzü kontrol etmeyi unutmayın.
+      </div>
+    </details>
+
+    <details>
+      <summary>Hesabımı nasıl silebilirim?</summary>
+      <div class="faq-body">
+        Hesabınızı kalıcı olarak silmek için aşağıdaki adımları izleyin:
+        <ol>
+          <li>Uygulamayı açın ve giriş yapın</li>
+          <li>Sol üstteki menü ikonuna dokunun</li>
+          <li>Profil fotoğrafınıza dokunarak <strong>Profili Düzenle</strong> ekranına gelin</li>
+          <li>Sayfanın en altına inin, <strong>"Hesap Yönetimi"</strong> bölümünü bulun</li>
+          <li><strong>"Hesabı Sil"</strong> seçeneğine dokunun</li>
+          <li>Şifrenizi girerek işlemi onaylayın</li>
+        </ol>
+        Hesabınız ve tüm verileriniz kalıcı olarak silinir; bu işlem geri alınamaz.
+      </div>
+    </details>
+
+    <details>
+      <summary>Bir kullanıcıyı nasıl engellerim?</summary>
+      <div class="faq-body">
+        Engellemek istediğiniz kullanıcının profiline gidin ve sağ üst köşedeki <strong>⋯</strong> menüsüne dokunun. <strong>"Engelle"</strong> seçeneğini seçin. Engellenen kullanıcıların paylaşımları akışınızda artık görünmez.
+      </div>
+    </details>
+
+    <details>
+      <summary>Engellediğim kullanıcıları nasıl görürüm ve engeli nasıl kaldırırım?</summary>
+      <div class="faq-body">
+        Yan menüyü açın ve <strong>"Engellenen Kullanıcılar"</strong> seçeneğine dokunun. Engellediğiniz kullanıcıların listesini görebilir, istediğiniz kullanıcının yanındaki <strong>"Engeli Kaldır"</strong> butonuna basarak engeli kaldırabilirsiniz.
+      </div>
+    </details>
+
+    <details>
+      <summary>Uygunsuz bir içeriği nasıl bildiririm?</summary>
+      <div class="faq-body">
+        Herhangi bir paylaşımın sağ üst köşesindeki <strong>⋯</strong> simgesine dokunarak <strong>"Şikayet Et"</strong> seçeneğini kullanabilirsiniz. Tüm bildirimler 24 saat içinde incelenir; topluluk kurallarını ihlal eden içerikler kaldırılır.
+      </div>
+    </details>
+
+    <details>
+      <summary>Verilerimi nasıl talep edebilirim?</summary>
+      <div class="faq-body">
+        Kişisel verilerinizin kopyasını talep etmek için <a href="mailto:emsilider25@gmail.com" style="color:var(--brand-light);">emsilider25@gmail.com</a> adresine e-posta gönderin. KVKK ve GDPR kapsamındaki taleplerinizi de bu adres üzerinden iletebilirsiniz.
+      </div>
+    </details>
+
+    <details>
+      <summary>Bildirimler gelmiyor, ne yapmalıyım?</summary>
+      <div class="faq-body">
+        Telefonunuzun <strong>Ayarlar → Erzurum Kampüs → Bildirimler</strong> bölümünden bildirimlerin açık olduğunu kontrol edin. Sorun devam ederse uygulamayı kapatıp yeniden açmayı deneyin.
+      </div>
+    </details>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- HESAP SİLME ADIMLARI -->
+<section id="hesap">
+  <div class="section-label">Hesap Silme</div>
+  <h2 class="section-title">Hesabınızı Kalıcı Olarak Silin</h2>
+  <p class="section-desc">Aşağıdaki adımları izleyerek hesabınızı ve tüm verilerinizi kalıcı olarak silebilirsiniz.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>Uygulamaya Giriş Yapın</h4>
+        <p>Hesabınıza giriş yaparak başlayın. E-posta/şifre, Google veya Apple ile giriş yapabilirsiniz.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>Menüyü Açın</h4>
+        <p>Sol üstteki hamburger (☰) menü ikonuna dokunun.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>Profili Düzenle'ye Gidin</h4>
+        <p>Profil fotoğrafınıza veya adınıza dokunarak "Profili Düzenle" ekranına geçin.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>Hesap Yönetimi Bölümünü Bulun</h4>
+        <p>Sayfanın en altına kaydırın. "Hesap Yönetimi" başlığının altında "Hesabı Sil" seçeneğini göreceksiniz.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h4>İşlemi Onaylayın</h4>
+        <p>Şifrenizi (veya Google/Apple kimlik doğrulamanızı) girerek işlemi onaylayın. Hesabınız ve tüm verileriniz kalıcı olarak silinir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- İLETİŞİM -->
+<section id="iletisim" style="padding-bottom: 120px;">
+  <div class="section-label">İletişim</div>
+  <h2 class="section-title">Hâlâ Sorunuz Mu Var?</h2>
+  <p class="section-desc">Aşağıdaki adrese e-posta gönderin; en kısa sürede size dönüş yapacağız.</p>
+
+  <div class="contact-wrap">
+    <div style="font-size:48px;margin-bottom:16px;">✉️</div>
+    <h3 style="font-size:24px;font-weight:700;margin-bottom:8px;">Destek Ekibimiz Yardıma Hazır</h3>
+    <p style="color:var(--muted);font-size:16px;max-width:400px;margin:0 auto;">Her türlü soru, öneri veya sorun için bize ulaşabilirsiniz. Genellikle 24 saat içinde yanıt veriyoruz.</p>
+    <a class="contact-email" href="mailto:emsilider25@gmail.com">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16v12H4z"/><polyline points="22,4 12,13 2,4"/>
+      </svg>
+      emsilider25@gmail.com
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="#">Gizlilik Politikası</a>
+    <a href="#">Kullanım Koşulları</a>
+    <a href="#iletisim">İletişim</a>
+  </div>
+  <p>© 2026 Erzurum Kampüs. Tüm hakları saklıdır.</p>
+</footer>
+
+</body>
+</html>
